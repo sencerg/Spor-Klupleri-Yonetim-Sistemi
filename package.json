@@ -1,0 +1,8 @@
+{
+  "name": "skys",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix apps/web",
+    "dev:mobile": "npm run web --prefix apps/mobile -- --port 8081"
+  }
+}

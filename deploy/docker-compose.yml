@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: skys
+      POSTGRES_PASSWORD: skys
+      POSTGRES_DB: skys
+    volumes:
+      - skys_pg:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://skys:skys@db:5432/skys
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  skys_pg:

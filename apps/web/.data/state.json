@@ -1,0 +1,142 @@
+{
+  "grants": {},
+  "brands": {
+    "kadikoy": {
+      "accent": "#c8102e",
+      "accentSoft": "#fdecee",
+      "motto": "Parke, disiplin, 2015."
+    }
+  },
+  "notes": {},
+  "retries": [
+    "n-u12"
+  ],
+  "sports": [
+    {
+      "id": "sp-mvp5o7iu-9pbt",
+      "clubId": "kadikoy",
+      "name": "Hentbol",
+      "model": "team",
+      "seasonId": "sz-kadikoy-2026"
+    },
+    {
+      "id": "sp-mvpn0bh3-y12l",
+      "clubId": "kadikoy",
+      "name": "Pilates",
+      "model": "team",
+      "seasonId": "sz-kadikoy-2026"
+    }
+  ],
+  "seasons": [],
+  "teams": [
+    {
+      "id": "tm-mvp5pbsq-3umc",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "sp-mvp5o7iu-9pbt",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "U10 Hentbol",
+      "category": "U10",
+      "coachStaffId": "st-melis"
+    }
+  ],
+  "people": [
+    {
+      "id": "pr-mvp5qfzb-u1ez",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "sp-mvp5o7iu-9pbt",
+      "teamId": "tm-mvp5pbsq-3umc",
+      "name": "Ela Korkmaz",
+      "birthYear": 2014,
+      "kind": "athlete",
+      "status": "active",
+      "guardian": "Selin Korkmaz",
+      "since": "2026-10-26"
+    }
+  ],
+  "guardians": [],
+  "sportNames": {
+    "sp-mvp5o7iu-9pbt": "Hentbol"
+  },
+  "branches": [
+    {
+      "id": "br-mvpltf2k-1qqt",
+      "clubId": "kadikoy",
+      "name": "Cezeri Yeşil Teknoloji Mesleki ve Teknik Anadolu",
+      "district": "Eryaman",
+      "address": "Tunahan, 211. Cd No:12, 06824 Etimesgut/Ankara"
+    }
+  ],
+  "facilities": [
+    {
+      "id": "tf-mvpmgdij-v5pw",
+      "clubId": "kadikoy",
+      "name": "Şehit Haydar ÇETİN Anadolu Lisesi",
+      "kind": "salon",
+      "capacity": 30
+    },
+    {
+      "id": "tf-mvpmghc6-j39q",
+      "clubId": "kadikoy",
+      "name": "Cezeri Yeşil Teknoloji Mesleki ve Teknik Anadolu",
+      "kind": "salon",
+      "capacity": 30
+    }
+  ],
+  "prices": [
+    {
+      "id": "uc-mvpng3f5-ggax",
+      "clubId": "kadikoy",
+      "name": "Basketbol Takım Ücretleri",
+      "amount": 6000
+    },
+    {
+      "id": "uc-mvppkffd-jcpf",
+      "clubId": "kadikoy",
+      "name": "Spor Okulu Basketbol",
+      "amount": 5000
+    },
+    {
+      "id": "uc-mvppkprq-z6us",
+      "clubId": "kadikoy",
+      "name": "Spor Okulu Voleybol",
+      "amount": 5000
+    },
+    {
+      "id": "uc-mvpplkm0-yjvg",
+      "clubId": "kadikoy",
+      "name": "Voleybol Takım Ücretleri",
+      "amount": 6000
+    }
+  ],
+  "hiddenBranchIds": [
+    "br-mvpls1h4-bb22",
+    "br-mvplv4vp-znvk",
+    "br-mvpm58gq-la3l"
+  ],
+  "hiddenFacilityIds": [
+    "tf-mvplsztv-14ty",
+    "tf-mvplvpd5-jpv2",
+    "tf-mvpm4bxc-enod",
+    "tf-mvpmcy54-rzlp",
+    "tf-mvpm8c89-j6qe",
+    "tf-mvpmp0iq-m70v"
+  ],
+  "duePayments": [],
+  "dueOverrides": [],
+  "trainings": [],
+  "hiddenTrainingIds": [],
+  "planNotices": [],
+  "developments": [],
+  "staff": [
+    {
+      "id": "st-mvpqtg4u-tamp",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "name": "Ufuk Akgül",
+      "duty": "Kulüp başkanı",
+      "phone": "0(555) 555 55 55"
+    }
+  ]
+}
