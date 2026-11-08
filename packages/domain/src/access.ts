@@ -1,6 +1,8 @@
 import type { GrantMap, Role, ScreenLink, StaffRole, UserAccount, Viewer } from "./types";
 
 export const DEMO_PASSWORD = "skys2026";
+export const PLATFORM_ADMIN_USER = "admin";
+export const PLATFORM_ADMIN_PASSWORD = "123456";
 
 export const roleLabels: Record<Role, string> = {
   platform_super: "Platform süper admin",
@@ -42,12 +44,14 @@ export const clubScreens: ScreenLink[] = [
   { group: "Spor Operasyonları", href: "takimlar", id: "teams.view", label: "Takımlar ve Gruplar" },
   { group: "Spor Operasyonları", href: "takvim", id: "schedule.view", label: "Antrenman Takvimi" },
   { group: "Spor Operasyonları", href: "yoklama", id: "attendance.view", label: "Yoklama" },
-  { group: "Spor Operasyonları", href: "seanslar", id: "sessions.view", label: "Seans Rezervasyonları" },
+  { group: "Spor Operasyonları", href: "yoklama-raporu", id: "attendance.report", label: "Yoklama raporu" },
+  { group: "Spor Operasyonları", href: "ozel-ders", id: "private.view", label: "Özel ders" },
   { group: "İşletme Yönetimi", href: "stok", id: "stock.view", label: "Stok ve Depolar" },
   { group: "İşletme Yönetimi", href: "zimmet", id: "custody.view", label: "Zimmet İşlemleri" },
   { group: "İşletme Yönetimi", href: "fiyatlar", id: "prices.view", label: "Fiyatlar" },
   { group: "İşletme Yönetimi", href: "aidat", id: "finance.view", label: "Aidatlar ve Tahsilatlar" },
   { group: "İşletme Yönetimi", href: "personel", id: "staff.view", label: "Personel Yönetimi" },
+  { group: "İşletme Yönetimi", href: "unvanlar", id: "staff.titles", label: "Unvanlar" },
   { group: "İletişim ve Analiz", href: "bildirimler", id: "notifications.view", label: "Bildirim Merkezi" },
   { group: "İletişim ve Analiz", href: "raporlar", id: "reports.view", label: "Raporlar" },
   { group: "İletişim ve Analiz", href: "gecmis", id: "audit.view", label: "İşlem Geçmişi" },
@@ -67,8 +71,10 @@ export const defaultGrants: Record<StaffRole, string[]> = {
     "teams.view",
     "schedule.view",
     "attendance.view",
-    "sessions.view",
+    "attendance.report",
+    "private.view",
     "staff.view",
+    "staff.titles",
     "prices.view",
     "notifications.view",
     "reports.view",
@@ -76,7 +82,7 @@ export const defaultGrants: Record<StaffRole, string[]> = {
   ],
   finance: ["dashboard.view", "athletes.view", "prices.view", "finance.view", "reports.view", "audit.view", "product.versions"],
   warehouse: ["dashboard.view", "athletes.view", "stock.view", "custody.view", "product.versions"],
-  coach: ["dashboard.view", "teams.view", "schedule.view", "attendance.view", "notifications.view", "product.versions"],
+  coach: ["dashboard.view", "teams.view", "schedule.view", "attendance.view", "attendance.report", "private.view", "notifications.view", "product.versions"],
 };
 
 const webRoles = new Set<Role>(staffRoles);
@@ -113,19 +119,26 @@ export function channelClubs(user: UserAccount, channel: "web" | "mobile") {
   );
 }
 
+function supporting(viewer: Viewer, clubId: string) {
+  return isSuper(viewer.user) && viewer.supportClubId === clubId;
+}
+
 export function isOwner(viewer: Viewer, clubId: string) {
+  if (supporting(viewer, clubId)) return true;
   return viewer.user.memberships.some(
     (membership) => membership.clubId === clubId && membership.role === "club_owner",
   );
 }
 
 export function canEditStructure(viewer: Viewer, clubId: string) {
+  if (supporting(viewer, clubId)) return true;
   if (isSuper(viewer.user)) return false;
   const membership = membershipFor(viewer.user, clubId);
   return Boolean(membership && (membership.role === "club_owner" || membership.role === "club_manager"));
 }
 
 export function canCollect(viewer: Viewer, clubId: string) {
+  if (supporting(viewer, clubId)) return true;
   if (isSuper(viewer.user)) return false;
   const membership = membershipFor(viewer.user, clubId);
   return Boolean(
@@ -135,6 +148,7 @@ export function canCollect(viewer: Viewer, clubId: string) {
 }
 
 export function canEditRoster(viewer: Viewer, clubId: string) {
+  if (supporting(viewer, clubId)) return true;
   if (isSuper(viewer.user)) return false;
   const membership = membershipFor(viewer.user, clubId);
   return Boolean(
@@ -146,6 +160,7 @@ export function canEditRoster(viewer: Viewer, clubId: string) {
 }
 
 export function canComposeNotice(viewer: Viewer, clubId: string) {
+  if (supporting(viewer, clubId)) return true;
   if (isSuper(viewer.user)) return false;
   const membership = membershipFor(viewer.user, clubId);
   return Boolean(

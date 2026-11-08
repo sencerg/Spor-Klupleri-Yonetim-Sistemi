@@ -1,24 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { CLUB_SCREEN_PATHS, clubSlugFromHost } from "@/lib/tenant";
+import { CLUB_SCREEN_PATHS, clubSlugFromHost, effectiveClubSlug, isBareLocalHost } from "@/lib/tenant";
 
 export function middleware(request: NextRequest) {
-  const slug = clubSlugFromHost(request.headers.get("host"));
   const { pathname, search } = request.nextUrl;
+  const host = request.headers.get("host");
+  const pinned = request.cookies.get("skys_club")?.value;
+  const hostSlug = clubSlugFromHost(host);
+  const allowPin = isBareLocalHost(host) && pathname !== "/login" && !pathname.startsWith("/platform") && !pathname.startsWith("/api");
+  const slug = allowPin ? effectiveClubSlug(host, pinned) : hostSlug;
   const headers = new Headers(request.headers);
   headers.set("x-club-slug", slug);
-  headers.set("x-pathname", pathname);
+  const prefix = `/c/${slug}`;
+  const visible = pathname === prefix ? "/" : pathname.startsWith(`${prefix}/`) ? pathname.slice(prefix.length) : pathname;
+  headers.set("x-pathname", visible);
   if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
     return NextResponse.next({ request: { headers } });
   }
-
-  const prefix = `/c/${slug}`;
-  if (pathname === prefix || pathname.startsWith(`${prefix}/`)) {
-    const next = pathname.slice(prefix.length) || "/";
-    return NextResponse.redirect(new URL(`${next}${search}`, request.url));
+  if (pathname.startsWith("/platform") || pathname === "/login") {
+    return NextResponse.next({ request: { headers } });
   }
-  if (pathname.startsWith("/c/") || pathname.startsWith("/platform") || pathname === "/kulup-sec") {
-    return NextResponse.redirect(new URL("/", request.url));
+
+  // /c/... is the real route. Sending it back to "/" loops, because "/" is rewritten here.
+  if (pathname.startsWith("/c/")) {
+    return NextResponse.next({ request: { headers } });
+  }
+  if (pathname === "/kulup-sec") {
+    return NextResponse.redirect(new URL(`/${search}`, request.url));
   }
 
   const url = request.nextUrl.clone();

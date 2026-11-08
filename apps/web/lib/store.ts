@@ -1,6 +1,13 @@
 import fs from "fs";
 import path from "path";
-import type { AthleteDevelopment, Branch, DueOverride, DuePayment, Facility, GrantMap, Guardian, Person, PlanNotice, Price, Season, Sport, Staff, Team, Training } from "@skys/domain";
+import type { AthleteDevelopment, Attendance, Branch, Club, ClubStudentRate, DueOverride, DuePayment, ExtraCharge, ExtraPayment, Facility, GearDelivery, GearItem, GrantMap, Guardian, Person, PlanNotice, PlatformAthlete, PlatformMembershipType, Price, PrivateLesson, PrivatePrice, RollNotice, Season, Sport, Staff, StaffTitle, Team, Training } from "@skys/domain";
+
+export interface ClubOwner {
+  id: string;
+  name: string;
+  email: string;
+  clubId: string;
+}
 
 export interface BrandChoice {
   accent: string;
@@ -26,11 +33,26 @@ export interface LocalState {
   hiddenFacilityIds: string[];
   duePayments: DuePayment[];
   dueOverrides: DueOverride[];
+  extraCharges: ExtraCharge[];
+  extraPayments: ExtraPayment[];
+  gearItems: GearItem[];
+  gearDeliveries: GearDelivery[];
   trainings: Training[];
   hiddenTrainingIds: string[];
   planNotices: PlanNotice[];
+  rollMarks: Attendance[];
+  rollNotices: RollNotice[];
+  privatePrices: PrivatePrice[];
+  privateLessons: PrivateLesson[];
   developments: AthleteDevelopment[];
   staff: Staff[];
+  titles: StaffTitle[];
+  hiddenTitleIds: string[];
+  clubs: Club[];
+  owners: ClubOwner[];
+  platformAthletes: PlatformAthlete[];
+  platformMembershipTypes: PlatformMembershipType[];
+  clubStudentRates: ClubStudentRate[];
 }
 
 const empty: LocalState = {
@@ -51,11 +73,26 @@ const empty: LocalState = {
   hiddenFacilityIds: [],
   duePayments: [],
   dueOverrides: [],
+  extraCharges: [],
+  extraPayments: [],
+  gearItems: [],
+  gearDeliveries: [],
   trainings: [],
   hiddenTrainingIds: [],
   planNotices: [],
+  rollMarks: [],
+  rollNotices: [],
+  privatePrices: [],
+  privateLessons: [],
   developments: [],
   staff: [],
+  titles: [],
+  hiddenTitleIds: [],
+  clubs: [],
+  owners: [],
+  platformAthletes: [],
+  platformMembershipTypes: [],
+  clubStudentRates: [],
 };
 const file = path.join(process.cwd(), ".data", "state.json");
 
@@ -80,37 +117,29 @@ function read(): LocalState {
       hiddenFacilityIds: parsed.hiddenFacilityIds ?? [],
       duePayments: parsed.duePayments ?? [],
       dueOverrides: parsed.dueOverrides ?? [],
+      extraCharges: parsed.extraCharges ?? [],
+      extraPayments: parsed.extraPayments ?? [],
+      gearItems: parsed.gearItems ?? [],
+      gearDeliveries: parsed.gearDeliveries ?? [],
       trainings: parsed.trainings ?? [],
       hiddenTrainingIds: parsed.hiddenTrainingIds ?? [],
       planNotices: parsed.planNotices ?? [],
+      rollMarks: parsed.rollMarks ?? [],
+      rollNotices: parsed.rollNotices ?? [],
+      privatePrices: parsed.privatePrices ?? [],
+      privateLessons: parsed.privateLessons ?? [],
       developments: parsed.developments ?? [],
       staff: parsed.staff ?? [],
+      titles: parsed.titles ?? [],
+      hiddenTitleIds: parsed.hiddenTitleIds ?? [],
+      clubs: parsed.clubs ?? [],
+      owners: parsed.owners ?? [],
+      platformAthletes: parsed.platformAthletes ?? [],
+      platformMembershipTypes: parsed.platformMembershipTypes ?? [],
+      clubStudentRates: parsed.clubStudentRates ?? [],
     };
   } catch {
-    return {
-      grants: {},
-      brands: {},
-      notes: {},
-      retries: [],
-      sports: [],
-      seasons: [],
-      teams: [],
-      people: [],
-      guardians: [],
-      sportNames: {},
-      branches: [],
-      facilities: [],
-      prices: [],
-      hiddenBranchIds: [],
-      hiddenFacilityIds: [],
-      duePayments: [],
-      dueOverrides: [],
-      trainings: [],
-      hiddenTrainingIds: [],
-      planNotices: [],
-      developments: [],
-      staff: [],
-    };
+    return { ...empty };
   }
 }
 

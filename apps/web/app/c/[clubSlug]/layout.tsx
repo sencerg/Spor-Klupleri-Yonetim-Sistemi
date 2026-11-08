@@ -2,9 +2,9 @@ import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import {
   canEnterClub,
-  clubBySlug,
   clubScreens,
   can,
+  isSuper,
   membershipFor,
   roleLabels,
 } from "@skys/domain";
@@ -13,6 +13,7 @@ import { Frame, SideNav, TopBar } from "@/components/shell";
 import { getSession, viewerFor } from "@/lib/session";
 import { readState } from "@/lib/store";
 import { branchName } from "@skys/domain";
+import { clubBySlug } from "@/lib/live";
 
 export default async function ClubLayout({
   children,
@@ -27,6 +28,7 @@ export default async function ClubLayout({
   if (!session) redirect("/login");
   const club = clubBySlug(clubSlug);
   if (!club) notFound();
+  if (isSuper(session.user) && session.supportClubId !== club.id) redirect("/platform");
   const viewer = viewerFor(session, club.id);
   if (!canEnterClub(viewer, club.id)) redirect("/login");
   const brand = readState().brands[club.id];

@@ -4,10 +4,22 @@
     "kadikoy": {
       "accent": "#c8102e",
       "accentSoft": "#fdecee",
-      "motto": "Parke, disiplin, 2015."
+      "motto": "Basketin Yeni Ufku"
+    },
+    "kl-mvwvhnpr-j4ol": {
+      "accent": "#103ec6",
+      "accentSoft": "#fdecee",
+      "motto": "Sincan basketbol. Parke, disiplin, akademi."
     }
   },
-  "notes": {},
+  "notes": {
+    "kadikoy": [
+      {
+        "title": "Antrenman iptal",
+        "audience": "U12 velileri"
+      }
+    ]
+  },
   "retries": [
     "n-u12"
   ],
@@ -25,6 +37,27 @@
       "name": "Pilates",
       "model": "team",
       "seasonId": "sz-kadikoy-2026"
+    },
+    {
+      "id": "sp-mvr8xdul-0j2z",
+      "clubId": "kadikoy",
+      "name": "Boks",
+      "model": "team",
+      "seasonId": "sz-kadikoy-2026"
+    },
+    {
+      "id": "sp-mw88j1ef-s4cr",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Basketbol",
+      "model": "team",
+      "seasonId": "sz-kl-mvwvhnpr-j4ol-2026"
+    },
+    {
+      "id": "sp-mw88j6oe-btb5",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Voleybol",
+      "model": "team",
+      "seasonId": "sz-kl-mvwvhnpr-j4ol-2026"
     }
   ],
   "seasons": [],
@@ -38,6 +71,104 @@
       "name": "U10 Hentbol",
       "category": "U10",
       "coachStaffId": "st-melis"
+    },
+    {
+      "id": "tm-mvqdir09-h3gc",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "sportId": "kb",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "u14 Basketbol Takımı",
+      "category": "",
+      "coachStaffId": "st-kerem",
+      "extraCoachIds": [],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mvqdja8t-pj1m",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "sportId": "kb",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "u16 Basketbol Takımı",
+      "category": "",
+      "coachStaffId": "st-mvpqtg4u-tamp",
+      "extraCoachIds": [
+        "st-mvpsz0yy-a51j"
+      ],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mvqltbqx-5dz6",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "sportId": "sp-mvpn0bh3-y12l",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "Pilates u12 anneleri",
+      "category": "",
+      "coachStaffId": "st-elif",
+      "extraCoachIds": [],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mvr8yalz-xnjb",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "sportId": "sp-mvr8xdul-0j2z",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "U19 Boks",
+      "category": "",
+      "coachStaffId": "st-mvpsz0yy-a51j",
+      "extraCoachIds": [],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mvtoxed1-z0hx",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvpn0bh3-y12l",
+      "seasonId": "sz-kadikoy-2026",
+      "name": "Spor Okulu pilateds",
+      "category": "",
+      "coachStaffId": "st-mvtowp07-4geb",
+      "extraCoachIds": [],
+      "kind": "school"
+    },
+    {
+      "id": "tm-mw88m5f1-mfxx",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "sportId": "sp-mw88j1ef-s4cr",
+      "seasonId": "sz-kl-mvwvhnpr-j4ol-2026",
+      "name": "U12 Basketbol",
+      "category": "",
+      "coachStaffId": "st-mw88l115-0hms",
+      "extraCoachIds": [],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mw88mfxk-xw28",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "sportId": "sp-mw88j1ef-s4cr",
+      "seasonId": "sz-kl-mvwvhnpr-j4ol-2026",
+      "name": "u11 basketbol",
+      "category": "",
+      "coachStaffId": "st-mw88l115-0hms",
+      "extraCoachIds": [],
+      "kind": "squad"
+    },
+    {
+      "id": "tm-mw88msr5-pmw8",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88it65-fu08",
+      "sportId": "sp-mw88j6oe-btb5",
+      "seasonId": "sz-kl-mvwvhnpr-j4ol-2026",
+      "name": "u16 voleybol kız takımı",
+      "category": "",
+      "coachStaffId": "st-mw88l115-0hms",
+      "extraCoachIds": [],
+      "kind": "squad"
     }
   ],
   "people": [
@@ -53,9 +184,173 @@
       "status": "active",
       "guardian": "Selin Korkmaz",
       "since": "2026-10-26"
+    },
+    {
+      "id": "pr-mvqdgnmy-1iub",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "teamId": "tm-mvqdja8t-pj1m",
+      "name": "Ali Çınar Öztürk",
+      "birthYear": 2015,
+      "kind": "athlete",
+      "enrollment": "squad",
+      "status": "active",
+      "guardian": "Hümeyra Öztürk",
+      "guardianId": "vl-mvqdgnmx-f2rt",
+      "motherId": "vl-mvqdgnmx-f2rt",
+      "phone": "0555555555555",
+      "reference": "Sencer Gültuna",
+      "since": "2026-10-26",
+      "priceId": "uc-mvpng3f5-ggax",
+      "priceName": "Basketbol Takım Ücretleri",
+      "listAmount": 6000,
+      "discountKind": "none",
+      "chargedAmount": 6000
+    },
+    {
+      "id": "defne",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "sportId": "kb",
+      "teamId": "tm-mvqdir09-h3gc",
+      "name": "Defne Aksoy",
+      "birthYear": 2014,
+      "kind": "athlete",
+      "enrollment": "squad",
+      "status": "active",
+      "guardian": "Can Aksoy",
+      "guardianId": "vl-mvqdkhjy-27mt",
+      "motherId": "vl-mvqdkhjy-27mt",
+      "phone": "0532 111 20 01",
+      "since": "2024-09-12",
+      "priceId": "uc-mvpng3f5-ggax",
+      "priceName": "Basketbol Takım Ücretleri",
+      "listAmount": 6000,
+      "discountKind": "none",
+      "chargedAmount": 6000
+    },
+    {
+      "id": "aras",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "teamId": "tm-mvqdir09-h3gc",
+      "name": "Aras Yalın",
+      "birthYear": 2014,
+      "kind": "athlete",
+      "status": "trial",
+      "guardian": "Okan Yalın",
+      "phone": "0532 111 20 04",
+      "since": "2026-10-01"
+    },
+    {
+      "id": "ali",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "name": "Ali Rüzgar",
+      "birthYear": 2014,
+      "kind": "athlete",
+      "status": "active",
+      "guardian": "Sevgi Rüzgar",
+      "phone": "0532 111 20 02",
+      "since": "2025-01-08"
+    },
+    {
+      "id": "pr-mvqeha8w-zfbb",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "teamId": "u12",
+      "name": "Ahmet Eren Bilici",
+      "birthYear": 2015,
+      "kind": "athlete",
+      "enrollment": "squad",
+      "status": "active",
+      "guardian": "Ömer Vahid Bilici",
+      "guardianId": "vl-mvqeha8w-n4mn",
+      "fatherId": "vl-mvqeha8w-n4mn",
+      "phone": "0(555) 533-33-33",
+      "reference": "Sencer Gültuna",
+      "since": "2026-10-26",
+      "priceId": "uc-mvpng3f5-ggax",
+      "priceName": "Basketbol Takım Ücretleri",
+      "listAmount": 6000,
+      "discountKind": "none",
+      "chargedAmount": 6000
+    },
+    {
+      "id": "maya",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "name": "Maya Çetin",
+      "birthYear": 2013,
+      "kind": "athlete",
+      "status": "active",
+      "guardian": "Aslı Çetin",
+      "phone": "0532 111 20 03",
+      "since": "2023-10-02"
+    },
+    {
+      "id": "ekin",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "kb",
+      "name": "Ekin Oral",
+      "birthYear": 2014,
+      "kind": "athlete",
+      "status": "active",
+      "guardian": "Derya Oral",
+      "phone": "0532 111 20 05",
+      "since": "2024-11-19"
+    },
+    {
+      "id": "pr-mvr90c0w-gl55",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "sportId": "sp-mvr8xdul-0j2z",
+      "name": "Kıvılcım Gültuna",
+      "birthYear": 2015,
+      "birthMonth": 5,
+      "birthDay": 19,
+      "kind": "athlete",
+      "enrollment": "squad",
+      "status": "left",
+      "reference": "Sencer Gültuna",
+      "since": "2026-10-26",
+      "priceId": "uc-mvpng3f5-ggax",
+      "priceName": "Basketbol Takım Ücretleri",
+      "listAmount": 6000,
+      "discountKind": "custom",
+      "chargedAmount": 2000,
+      "teamId": "u12"
     }
   ],
-  "guardians": [],
+  "guardians": [
+    {
+      "id": "vl-mvqdgnmx-f2rt",
+      "clubId": "kadikoy",
+      "name": "Hümeyra Öztürk",
+      "phone": "0555555555555",
+      "role": "mother"
+    },
+    {
+      "id": "vl-mvqdkhjy-27mt",
+      "clubId": "kadikoy",
+      "name": "Can Aksoy",
+      "phone": "0532 111 20 01",
+      "role": "mother"
+    },
+    {
+      "id": "vl-mvqeha8w-n4mn",
+      "clubId": "kadikoy",
+      "name": "Ömer Vahid Bilici",
+      "phone": "0(555) 533-33-33",
+      "role": "father"
+    }
+  ],
   "sportNames": {
     "sp-mvp5o7iu-9pbt": "Hentbol"
   },
@@ -82,6 +377,27 @@
       "name": "Cezeri Yeşil Teknoloji Mesleki ve Teknik Anadolu",
       "kind": "salon",
       "capacity": 30
+    },
+    {
+      "id": "tf-mvr8wwnn-cv3u",
+      "clubId": "kadikoy",
+      "name": "Sincan Salonu",
+      "kind": "saha",
+      "capacity": 30
+    },
+    {
+      "id": "tf-mw88ii6z-cxxi",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Mevlana Salonu",
+      "kind": "salon",
+      "capacity": 300
+    },
+    {
+      "id": "tf-mw88it65-fu08",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Yenikent Salonu",
+      "kind": "salon",
+      "capacity": 300
     }
   ],
   "prices": [
@@ -108,6 +424,24 @@
       "clubId": "kadikoy",
       "name": "Voleybol Takım Ücretleri",
       "amount": 6000
+    },
+    {
+      "id": "uc-mvtovg13-icgg",
+      "clubId": "kadikoy",
+      "name": "yetişkin plates",
+      "amount": 5000
+    },
+    {
+      "id": "uc-mw88ol5o-9r05",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Spor Okulu",
+      "amount": 2000
+    },
+    {
+      "id": "uc-mw88orhi-cg33",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "name": "Takım. Grubu",
+      "amount": 3000
     }
   ],
   "hiddenBranchIds": [
@@ -121,14 +455,558 @@
     "tf-mvpm4bxc-enod",
     "tf-mvpmcy54-rzlp",
     "tf-mvpm8c89-j6qe",
-    "tf-mvpmp0iq-m70v"
+    "tf-mvpmp0iq-m70v",
+    "moda-parke",
+    "caferaga-parke",
+    "bostanci-salon"
   ],
-  "duePayments": [],
-  "dueOverrides": [],
-  "trainings": [],
-  "hiddenTrainingIds": [],
-  "planNotices": [],
-  "developments": [],
+  "duePayments": [
+    {
+      "id": "od-mvsnurv7-91jp",
+      "clubId": "kadikoy",
+      "personId": "pr-mvr90c0w-gl55",
+      "month": "2026-10",
+      "date": "2026-10-26",
+      "amount": 1500,
+      "method": "cash"
+    },
+    {
+      "id": "od-mvuoy3ez-1vu9",
+      "clubId": "kadikoy",
+      "personId": "pr-mvqeha8w-zfbb",
+      "month": "2027-06",
+      "date": "2026-10-30",
+      "amount": 6000
+    },
+    {
+      "id": "od-mw88zpkq-c703",
+      "clubId": "kadikoy",
+      "personId": "pr-mvqeha8w-zfbb",
+      "month": "2027-05",
+      "date": "2026-11-08",
+      "amount": 6000,
+      "collectorStaffId": "st-ece",
+      "method": "cash"
+    },
+    {
+      "id": "od-mw899z7f-do7t",
+      "clubId": "kadikoy",
+      "personId": "defne",
+      "month": "2027-06",
+      "date": "2026-11-08",
+      "amount": 6000,
+      "collectorStaffId": "st-mvviqpi3-lqrz",
+      "method": "cash",
+      "note": "parayı çekmeceye koydum"
+    }
+  ],
+  "dueOverrides": [
+    {
+      "clubId": "kadikoy",
+      "personId": "pr-mvr90c0w-gl55",
+      "month": "2026-10",
+      "amount": 2000
+    }
+  ],
+  "extraCharges": [
+    {
+      "id": "ek-mvuow9qx-b6m3",
+      "clubId": "kadikoy",
+      "personId": "pr-mvqeha8w-zfbb",
+      "title": "Antrenman forması · S · 23",
+      "amount": 2000,
+      "date": "2026-10-30"
+    }
+  ],
+  "extraPayments": [
+    {
+      "id": "eo-mvuox7qx-dts2",
+      "clubId": "kadikoy",
+      "chargeId": "ek-mvuow9qx-b6m3",
+      "personId": "pr-mvqeha8w-zfbb",
+      "date": "2026-10-30",
+      "amount": 2000,
+      "collectorStaffId": "st-asli-k",
+      "method": "cash"
+    }
+  ],
+  "gearItems": [
+    {
+      "id": "ur-mvuov9ao-nplf",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "S",
+      "qty": 100
+    },
+    {
+      "id": "ur-mvviorcb-zuf3",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Basketbol Topu",
+      "kind": "plain",
+      "qty": 50
+    },
+    {
+      "id": "ur-mvvipnvf-2qdw",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "1",
+      "qty": 100
+    },
+    {
+      "id": "ur-mvvipnvf-rmz0",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "2",
+      "qty": 100
+    },
+    {
+      "id": "ur-mvvipnvf-fje4",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "3",
+      "qty": 100
+    },
+    {
+      "id": "ur-mvvipnvf-nmi7",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "Medium",
+      "qty": 100
+    },
+    {
+      "id": "ur-mw88pizf-rj8w",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "1",
+      "qty": 50
+    },
+    {
+      "id": "ur-mw88pizf-x5g4",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "2",
+      "qty": 59
+    },
+    {
+      "id": "ur-mw88pizf-8x4b",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "Small",
+      "qty": 599
+    },
+    {
+      "id": "ur-mw88pizf-c0pd",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "Medium",
+      "qty": 600
+    },
+    {
+      "id": "ur-mw88pizf-vqpa",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "name": "Antrenman forması",
+      "kind": "training",
+      "size": "Large",
+      "qty": 100
+    }
+  ],
+  "gearDeliveries": [
+    {
+      "id": "td-mvuow9qx-p6rg",
+      "clubId": "kadikoy",
+      "itemId": "ur-mvuov9ao-nplf",
+      "personId": "pr-mvqeha8w-zfbb",
+      "size": "S",
+      "number": "23",
+      "date": "2026-10-30",
+      "staffId": "st-mvpqtg4u-tamp",
+      "price": 2000,
+      "chargeId": "ek-mvuow9qx-b6m3"
+    }
+  ],
+  "trainings": [
+    {
+      "id": "tr-mvqggf1u-omzo",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "kb",
+      "teamId": "u12",
+      "coachStaffId": "st-melis",
+      "title": "u12",
+      "date": "2026-10-26",
+      "start": "18:00",
+      "end": "19:20",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvqgh4x3-24hb",
+      "clubId": "kadikoy",
+      "branchId": "caferaga",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "kb",
+      "teamId": "u14",
+      "coachStaffId": "st-serkan",
+      "title": "u14",
+      "date": "2026-10-26",
+      "start": "19:20",
+      "end": "20:40",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvqlsdjo-zppe0",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "facilityId": "tf-mvpmghc6-j39q",
+      "sportId": "sp-mvp5o7iu-9pbt",
+      "teamId": "tm-mvp5pbsq-3umc",
+      "coachStaffId": "st-melis",
+      "title": "U10 Hentbol",
+      "date": "2026-10-27",
+      "start": "18:00",
+      "end": "19:20",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvqltks3-8zq20",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvpn0bh3-y12l",
+      "teamId": "tm-mvqltbqx-5dz6",
+      "coachStaffId": "st-elif",
+      "title": "Pilates u12 anneleri",
+      "date": "2026-10-26",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvqlu9e4-f2xe0",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvp5o7iu-9pbt",
+      "teamId": "tm-mvp5pbsq-3umc",
+      "coachStaffId": "st-melis",
+      "title": "U10 Hentbol",
+      "date": "2026-10-27",
+      "start": "20:40",
+      "end": "22:00",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvr94bvi-8ju90",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvr8wwnn-cv3u",
+      "sportId": "sp-mvr8xdul-0j2z",
+      "teamId": "tm-mvr8yalz-xnjb",
+      "coachStaffId": "st-mvpsz0yy-a51j",
+      "title": "U19 Boks",
+      "date": "2026-10-28",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvr94p02-atz30",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvr8wwnn-cv3u",
+      "sportId": "sp-mvr8xdul-0j2z",
+      "teamId": "tm-mvr8yalz-xnjb",
+      "coachStaffId": "st-mvpsz0yy-a51j",
+      "title": "U19 Boks",
+      "date": "2026-10-29",
+      "start": "16:00",
+      "end": "17:00",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvr95kby-x7y40",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "kb",
+      "teamId": "tm-mvqdja8t-pj1m",
+      "coachStaffId": "st-mvpqtg4u-tamp",
+      "title": "u16 Basketbol Takımı",
+      "date": "2026-10-28",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvr95rpa-kxbt0",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvpn0bh3-y12l",
+      "teamId": "tm-mvqltbqx-5dz6",
+      "coachStaffId": "st-elif",
+      "title": "Pilates u12 anneleri",
+      "date": "2026-10-28",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvr96a0n-0wcj0",
+      "clubId": "kadikoy",
+      "branchId": "br-mvpltf2k-1qqt",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "kb",
+      "teamId": "tm-mvqdir09-h3gc",
+      "coachStaffId": "st-kerem",
+      "title": "u14 Basketbol Takımı",
+      "date": "2026-10-28",
+      "start": "18:00",
+      "end": "19:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvtosypr-pwby0",
+      "clubId": "kadikoy",
+      "branchId": "caferaga",
+      "facilityId": "tf-mvpmghc6-j39q",
+      "sportId": "kb",
+      "teamId": "u14",
+      "coachStaffId": "st-serkan",
+      "title": "U14 Basketbol",
+      "date": "2026-10-27",
+      "start": "10:00",
+      "end": "11:30",
+      "kind": "training",
+      "assign": "team"
+    },
+    {
+      "id": "tr-mvtoxozj-dqcj0",
+      "clubId": "kadikoy",
+      "branchId": "moda",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvpn0bh3-y12l",
+      "teamId": "tm-mvtoxed1-z0hx",
+      "coachStaffId": "st-mvtowp07-4geb",
+      "title": "Spor Okulu pilateds",
+      "date": "2026-10-27",
+      "start": "15:00",
+      "end": "16:30",
+      "kind": "training",
+      "assign": "team"
+    }
+  ],
+  "hiddenTrainingIds": [
+    "tr-u12-y",
+    "tr-u12-t",
+    "tr-telafi",
+    "tr-u14-n",
+    "tr-vol"
+  ],
+  "planNotices": [
+    {
+      "id": "pn-mvtoxozj-498c",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvtoxozj-dqcj0",
+      "at": "2026-10-29T15:21:04.447Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "Spor Okulu pilateds"
+    },
+    {
+      "id": "pn-mvtosyps-qwky",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvtosypr-pwby0",
+      "at": "2026-10-29T15:17:23.776Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "U14 Basketbol"
+    },
+    {
+      "id": "pn-mvr96a0n-6eju",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvr96a0n-0wcj0",
+      "at": "2026-10-27T22:24:18.743Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "u14 Basketbol Takımı"
+    },
+    {
+      "id": "pn-mvr95rpa-frqg",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvr95rpa-kxbt0",
+      "at": "2026-10-27T22:23:55.006Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "Pilates u12 anneleri"
+    },
+    {
+      "id": "pn-mvr95kby-09yi",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvr95kby-x7y40",
+      "at": "2026-10-27T22:23:45.454Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "u16 Basketbol Takımı"
+    },
+    {
+      "id": "pn-mvr94p02-ffhk",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvr94p02-atz30",
+      "at": "2026-10-27T22:23:04.850Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "U19 Boks"
+    },
+    {
+      "id": "pn-mvr94bvi-42z1",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvr94bvi-8ju90",
+      "at": "2026-10-27T22:22:47.838Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "U19 Boks"
+    },
+    {
+      "id": "pn-mvqlu9e4-8z2f",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqlu9e4-f2xe0",
+      "at": "2026-10-27T11:31:06.892Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "U10 Hentbol"
+    },
+    {
+      "id": "pn-mvqltks3-b6yw",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqltks3-8zq20",
+      "at": "2026-10-27T11:30:34.995Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "Pilates u12 anneleri"
+    },
+    {
+      "id": "pn-mvqlsdjo-tbcq",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqlsdjo-zppe0",
+      "at": "2026-10-27T11:29:38.964Z",
+      "summary": "Sürükle bırak: 1 antrenman",
+      "audience": "U10 Hentbol"
+    },
+    {
+      "id": "pn-mvqlrwvq-2vk2",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqgh4x3-24hb",
+      "at": "2026-10-27T11:29:17.366Z",
+      "summary": "Plan değişti: u14 26.10.2026 19:20–20:40 · Şehit Haydar ÇETİN Anadolu Lisesi",
+      "audience": "U14 Basketbol"
+    },
+    {
+      "id": "pn-mvqgh4x3-au3u",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqgh4x3-24hb",
+      "at": "2026-10-27T09:00:56.487Z",
+      "summary": "Planlandı: u14 26.10.2026 19:20–20:40 · Şehit Haydar ÇETİN Anadolu Lisesi",
+      "audience": "U14 Basketbol"
+    }
+  ],
+  "rollMarks": [
+    {
+      "sessionId": "tr-mvqggf1u-omzo",
+      "personId": "bora",
+      "status": "present"
+    },
+    {
+      "sessionId": "tr-mvqggf1u-omzo",
+      "personId": "su",
+      "status": "present"
+    },
+    {
+      "sessionId": "tr-mvqggf1u-omzo",
+      "personId": "ruzgar",
+      "status": "present"
+    },
+    {
+      "sessionId": "tr-mvqggf1u-omzo",
+      "personId": "pr-mvqeha8w-zfbb",
+      "status": "present"
+    }
+  ],
+  "rollNotices": [
+    {
+      "id": "yn-mvqmdchj-w2fe",
+      "clubId": "kadikoy",
+      "sessionId": "tr-mvqggf1u-omzo",
+      "at": "2026-10-29T15:18:35.511Z",
+      "title": "U12 Basketbol yoklaması 26.10.2026 18:00",
+      "audience": "U12 Basketbol velileri",
+      "lines": [
+        {
+          "personId": "bora",
+          "name": "Bora Keskin",
+          "status": "present"
+        },
+        {
+          "personId": "su",
+          "name": "Su Meltem",
+          "status": "present"
+        },
+        {
+          "personId": "ruzgar",
+          "name": "Rüzgar İnce",
+          "status": "present"
+        },
+        {
+          "personId": "pr-mvqeha8w-zfbb",
+          "name": "Ahmet Eren Bilici",
+          "status": "present"
+        }
+      ]
+    }
+  ],
+  "privatePrices": [
+    {
+      "id": "uo-mvsnsuq3-tfo7",
+      "clubId": "kadikoy",
+      "name": "Batuhan 1e1",
+      "coachStaffId": "st-mvpsz0yy-a51j",
+      "amount": 2000
+    }
+  ],
+  "privateLessons": [],
+  "developments": [
+    {
+      "personId": "defne",
+      "monthly": [],
+      "notes": [],
+      "basketballHistory": [],
+      "start": {
+        "date": "2026-10-21",
+        "heightCm": 90
+      }
+    }
+  ],
   "staff": [
     {
       "id": "st-mvpqtg4u-tamp",
@@ -137,6 +1015,357 @@
       "name": "Ufuk Akgül",
       "duty": "Kulüp başkanı",
       "phone": "0(555) 555 55 55"
+    },
+    {
+      "id": "st-mvpsz0yy-a51j",
+      "clubId": "kadikoy",
+      "name": "Sencer Gültuna",
+      "duty": "Antrenör",
+      "titleId": "ut-kadikoy-antrenor",
+      "phone": "05542691910"
+    },
+    {
+      "id": "st-mvr91pqo-arg5",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvr8wwnn-cv3u",
+      "sportId": "sp-mvr8xdul-0j2z",
+      "name": "Sinan Şamil Sam",
+      "duty": "Boks Hocası",
+      "titleId": "ut-mvr915a8-4u25",
+      "phone": "23232323232323"
+    },
+    {
+      "id": "st-mvtowp07-4geb",
+      "clubId": "kadikoy",
+      "sportId": "kb",
+      "name": "ljkhlk",
+      "duty": "Antrenör",
+      "titleId": "ut-kadikoy-antrenor",
+      "phone": "55555555555"
+    },
+    {
+      "id": "st-mvviqpi3-lqrz",
+      "clubId": "kadikoy",
+      "facilityId": "tf-mvpmgdij-v5pw",
+      "sportId": "sp-mvp5o7iu-9pbt",
+      "name": "Sencer Gültunaa",
+      "duty": "Antrenör",
+      "titleId": "ut-kadikoy-antrenor",
+      "phone": "05542691910",
+      "email": "sencergultuna@gmail.com",
+      "loginRole": "coach"
+    },
+    {
+      "id": "st-mw88l115-0hms",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "facilityId": "tf-mw88ii6z-cxxi",
+      "sportId": "sp-mw88j1ef-s4cr",
+      "name": "Furkan Beydili",
+      "duty": "Başantrenör",
+      "titleId": "ut-kl-mvwvhnpr-j4ol-bas",
+      "phone": "05542691910",
+      "email": "furkan@furkan.com",
+      "loginRole": "coach"
+    }
+  ],
+  "titles": [
+    {
+      "id": "ut-mvr915a8-4u25",
+      "clubId": "kadikoy",
+      "name": "Boks Hocası",
+      "scope": "lead"
+    }
+  ],
+  "hiddenTitleIds": [
+    "ut-mvprmak9-ex75"
+  ],
+  "clubs": [
+    {
+      "id": "kl-mvwvhnpr-j4ol",
+      "slug": "sincanbasket",
+      "name": "Sincan Basketbol Akademi",
+      "legalName": "Sincan Basketbol Akademi",
+      "city": "Ankara",
+      "district": "Sincan",
+      "phone": "",
+      "email": "sincanbasket@allplay360.com",
+      "motto": "Sincan basketbol. Parke, disiplin, akademi.",
+      "monogram": "SB",
+      "accent": "#103ec6",
+      "accentSoft": "#fdecee",
+      "splash": "#ffffff",
+      "planId": "baslangic",
+      "status": "active",
+      "trialEnds": "2026-10-30",
+      "cancelHours": 12,
+      "noShowConsumesCredit": true,
+      "waitlistMinutes": 20,
+      "logo": "/club-logos/sincanbasket.jpg"
+    }
+  ],
+  "owners": [
+    {
+      "id": "sa-mvwvhnps-1q2f",
+      "name": "Hasan Altın",
+      "email": "sincanbasket@allplay360.com",
+      "clubId": "kl-mvwvhnpr-j4ol"
+    }
+  ],
+  "platformAthletes": [
+    {
+      "id": "pa-club-defne",
+      "name": "Defne Aksoy",
+      "birthYear": 2014,
+      "phone": "0532 111 20 01",
+      "status": "active",
+      "since": "2024-09-12",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "defne",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-ali",
+      "name": "Ali Rüzgar",
+      "birthYear": 2014,
+      "phone": "0532 111 20 02",
+      "status": "active",
+      "since": "2025-01-08",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "ali",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-maya",
+      "name": "Maya Çetin",
+      "birthYear": 2013,
+      "phone": "0532 111 20 03",
+      "status": "active",
+      "since": "2023-10-02",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "maya",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-aras",
+      "name": "Aras Yalın",
+      "birthYear": 2014,
+      "phone": "0532 111 20 04",
+      "status": "trial",
+      "since": "2026-10-01",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "aras",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-ekin",
+      "name": "Ekin Oral",
+      "birthYear": 2014,
+      "phone": "0532 111 20 05",
+      "status": "active",
+      "since": "2024-11-19",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "ekin",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-bora",
+      "name": "Bora Keskin",
+      "birthYear": 2014,
+      "phone": "0532 111 20 06",
+      "status": "active",
+      "since": "2025-02-14",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "bora",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-su",
+      "name": "Su Meltem",
+      "birthYear": 2014,
+      "phone": "0532 111 20 07",
+      "status": "active",
+      "since": "2024-09-30",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "su",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-ruzgar",
+      "name": "Rüzgar İnce",
+      "birthYear": 2014,
+      "phone": "0532 111 20 08",
+      "status": "active",
+      "since": "2025-03-03",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "ruzgar",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-ege",
+      "name": "Ege Aksoy",
+      "birthYear": 2012,
+      "phone": "0532 111 20 11",
+      "status": "active",
+      "since": "2022-09-15",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "ege",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-kerems",
+      "name": "Kerem Soylu",
+      "birthYear": 2012,
+      "phone": "0532 111 20 12",
+      "status": "active",
+      "since": "2023-09-01",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "kerems",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-ada",
+      "name": "Ada Er",
+      "birthYear": 2012,
+      "phone": "0532 111 20 13",
+      "status": "active",
+      "since": "2024-01-20",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "ada",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-nehir",
+      "name": "Nehir Acar",
+      "birthYear": 2011,
+      "phone": "0532 111 20 21",
+      "status": "active",
+      "since": "2023-10-10",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "nehir",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-denizu",
+      "name": "Deniz Uçar",
+      "birthYear": 2010,
+      "phone": "0532 111 20 22",
+      "status": "active",
+      "since": "2022-11-05",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "denizu",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-lara",
+      "name": "Lara Şen",
+      "birthYear": 2011,
+      "phone": "0533 000 20 02",
+      "status": "active",
+      "since": "2024-09-18",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "lara",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-pr-mvp5qfzb-u1ez",
+      "name": "Ela Korkmaz",
+      "birthYear": 2014,
+      "status": "active",
+      "since": "2026-10-26",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "pr-mvp5qfzb-u1ez",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-pr-mvqdgnmy-1iub",
+      "name": "Ali Çınar Öztürk",
+      "birthYear": 2015,
+      "phone": "0555555555555",
+      "status": "active",
+      "since": "2026-10-26",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "pr-mvqdgnmy-1iub",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-pr-mvqeha8w-zfbb",
+      "name": "Ahmet Eren Bilici",
+      "birthYear": 2015,
+      "phone": "0(555) 533-33-33",
+      "status": "active",
+      "since": "2026-10-26",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "pr-mvqeha8w-zfbb",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-club-pr-mvr90c0w-gl55",
+      "name": "Kıvılcım Gültuna",
+      "birthYear": 2015,
+      "birthMonth": 5,
+      "birthDay": 19,
+      "status": "left",
+      "since": "2026-10-26",
+      "source": "club",
+      "clubId": "kadikoy",
+      "clubPersonId": "pr-mvr90c0w-gl55",
+      "clubName": "Yeni Ufuklar"
+    },
+    {
+      "id": "pa-mvxloed0-iw40",
+      "name": "Atabey Gültuna",
+      "birthYear": 2025,
+      "status": "active",
+      "since": "2026-11-01",
+      "source": "allplay360",
+      "clubId": "kadikoy",
+      "clubName": "Yeni Ufuklar",
+      "membershipTypeId": "pmt-mvxln59g-exok",
+      "membershipTypeName": "Sporcu Özel Full Paket",
+      "membershipAmount": 5000
+    }
+  ],
+  "platformMembershipTypes": [
+    {
+      "id": "pmt-mvxln59g-exok",
+      "name": "Sporcu Özel Full Paket",
+      "amount": 5000
+    },
+    {
+      "id": "pmt-mvxlnqh8-dhek",
+      "name": "Sporcu Takip Gelişim ve Raporlama",
+      "amount": 3000
+    }
+  ],
+  "clubStudentRates": [
+    {
+      "id": "csr-mvxlg3cv-in8u",
+      "clubId": "kadikoy",
+      "month": "2026-11",
+      "unitPrice": 100
+    },
+    {
+      "id": "csr-mvxlg9tw-66yt",
+      "clubId": "kl-mvwvhnpr-j4ol",
+      "month": "2026-11",
+      "unitPrice": 50
     }
   ]
 }

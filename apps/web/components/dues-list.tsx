@@ -13,6 +13,7 @@ export function DuesList({
     team: string;
     month: string;
     monthKey: string;
+    monthKeyLabel?: string;
     fee: string;
     paid: string;
     remaining: string;
@@ -48,7 +49,7 @@ export function DuesList({
           label="Ay"
           value={month}
           options={months}
-          labelOf={(value) => rows.find((row) => row.monthKey === value)?.month ?? value}
+          labelOf={(value) => rows.find((row) => row.monthKey === value)?.monthKeyLabel ?? rows.find((row) => row.monthKey === value)?.month ?? value}
           onChange={setMonth}
           allLabel="Tüm aylar"
         />

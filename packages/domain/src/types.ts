@@ -78,13 +78,27 @@ export interface Season {
   sportId?: string;
 }
 
+export type TitleScope = "lead" | "coach" | "finance";
+
+export interface StaffTitle {
+  id: string;
+  clubId: string;
+  name: string;
+  scope: TitleScope;
+}
+
 export interface Staff {
   id: string;
   clubId: string;
   branchId?: string;
+  facilityId?: string;
+  sportId?: string;
   name: string;
   duty: string;
+  titleId?: string;
   phone: string;
+  email?: string;
+  loginRole?: StaffRole;
   leave?: { from: string; to: string; reason: string };
 }
 
@@ -96,11 +110,13 @@ export interface Team {
   id: string;
   clubId: string;
   branchId?: string;
+  facilityId?: string;
   sportId: string;
   seasonId: string;
   name: string;
   category: string;
   coachStaffId: string;
+  extraCoachIds?: string[];
   kind?: GroupKind;
 }
 
@@ -125,6 +141,8 @@ export interface Person {
   teamId?: string;
   name: string;
   birthYear: number;
+  birthMonth?: number;
+  birthDay?: number;
   kind: "athlete" | "member";
   enrollment?: GroupKind;
   status: PersonStatus;
@@ -135,6 +153,7 @@ export interface Person {
   emergencyId?: string;
   phone?: string;
   reference?: string;
+  matchNumber?: string;
   since: string;
   priceId?: string;
   priceName?: string;
@@ -151,15 +170,60 @@ export interface Price {
   amount: number;
 }
 
+/** AllPlay360 sistem tarafı üyelik tipi (özel üye fiyatları). */
+export interface PlatformMembershipType {
+  id: string;
+  name: string;
+  amount: number;
+}
+
+/**
+ * Sistem paneli sporcu kaydı.
+ * Kaynak club ise kulüp kartının kopyasıdır; platformdaki değişiklik kulübe yazılmaz.
+ * Kaynak allplay360 ise AllPlay360 özel üyesidir; isteğe bağlı kulüp bağlantısı yalnızca referanstır.
+ */
+export interface PlatformAthlete {
+  id: string;
+  name: string;
+  birthYear: number;
+  birthMonth?: number;
+  birthDay?: number;
+  phone?: string;
+  status: PersonStatus;
+  since: string;
+  source: "club" | "allplay360";
+  clubId?: string;
+  clubPersonId?: string;
+  clubName?: string;
+  membershipTypeId?: string;
+  membershipTypeName?: string;
+  membershipAmount?: number;
+  note?: string;
+}
+
+/** Kulüp başına aylık öğrenci birim fiyatı (AllPlay360 → kulüp faturalaması). */
+export interface ClubStudentRate {
+  id: string;
+  clubId: string;
+  month: string;
+  unitPrice: number;
+}
+
 export interface MeasurePoint {
   date: string;
   heightCm?: number;
   weightKg?: number;
+  spanCm?: number;
+  shoe?: string;
 }
 
 export interface AthleteNote {
   date: string;
   text: string;
+  title?: string;
+  season?: string;
+  place?: string;
+  position?: string;
 }
 
 export interface AthleteDevelopment {
@@ -178,13 +242,45 @@ export interface Training {
   sportId: string;
   teamId?: string;
   coachStaffId: string;
+  coverStaffIds?: string[];
+  absentStaffIds?: string[];
   title: string;
   date: string;
   start: string;
   end: string;
-  kind: "training" | "class";
+  kind: "training" | "class" | "match" | "private";
   capacity?: number;
   assign?: "team" | "coach";
+  seriesId?: string;
+  personId?: string;
+}
+
+export interface PrivatePrice {
+  id: string;
+  clubId: string;
+  name: string;
+  coachStaffId: string;
+  amount: number;
+}
+
+export type PrivateLessonStatus = "requested" | "scheduled" | "cancelled";
+
+export interface PrivateLesson {
+  id: string;
+  clubId: string;
+  personId: string;
+  teamId?: string;
+  coachStaffId: string;
+  facilityId?: string;
+  priceId: string;
+  title: string;
+  date?: string;
+  start?: string;
+  end?: string;
+  status: PrivateLessonStatus;
+  trainingId?: string;
+  note?: string;
+  amount: number;
 }
 
 export interface PlanNotice {
@@ -202,6 +298,16 @@ export interface Attendance {
   sessionId: string;
   personId: string;
   status: Exclude<AttendanceStatus, "pending">;
+}
+
+export interface RollNotice {
+  id: string;
+  clubId: string;
+  sessionId: string;
+  at: string;
+  title: string;
+  audience: string;
+  lines: { personId: string; name: string; status: Exclude<AttendanceStatus, "pending"> }[];
 }
 
 export interface Booking {
@@ -230,7 +336,9 @@ export interface DuePayment {
   month: string;
   date: string;
   amount: number;
-  method: PayMethod;
+  method?: PayMethod;
+  collectorStaffId?: string;
+  note?: string;
 }
 
 export interface DueOverride {
@@ -238,6 +346,55 @@ export interface DueOverride {
   personId: string;
   month: string;
   amount: number;
+}
+
+export interface ExtraCharge {
+  id: string;
+  clubId: string;
+  personId: string;
+  title: string;
+  amount: number;
+  date: string;
+}
+
+export const jerseySizes = ["1", "2", "3", "4", "5", "XSmall", "Small", "Medium", "Large", "XLarge"] as const;
+
+export type GearKind = "plain" | "training" | "match";
+
+export interface GearItem {
+  id: string;
+  clubId: string;
+  facilityId?: string;
+  name: string;
+  kind?: GearKind;
+  size?: string;
+  qty?: number;
+}
+
+export interface GearDelivery {
+  id: string;
+  clubId: string;
+  itemId: string;
+  personId: string;
+  size: string;
+  number: string;
+  count?: number;
+  date: string;
+  staffId: string;
+  price: number;
+  chargeId: string;
+}
+
+export interface ExtraPayment {
+  id: string;
+  clubId: string;
+  chargeId: string;
+  personId: string;
+  date: string;
+  amount: number;
+  method?: PayMethod;
+  collectorStaffId?: string;
+  note?: string;
 }
 
 export interface Credit {
@@ -361,5 +518,11 @@ export interface Directory {
   trainings?: Training[];
   hiddenTrainingIds?: string[];
   planNotices?: PlanNotice[];
+  rollMarks?: Attendance[];
+  rollNotices?: RollNotice[];
+  privatePrices?: PrivatePrice[];
+  privateLessons?: PrivateLesson[];
   staff?: Staff[];
+  titles?: StaffTitle[];
+  hiddenTitleIds?: string[];
 }

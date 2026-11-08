@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { channelClubs, clubById, roleLabels } from "@skys/domain";
+import { channelClubs, roleLabels } from "@skys/domain";
+import { clubById } from "@/lib/live";
 import { getSession } from "@/lib/session";
 
 export default async function PickClubPage() {

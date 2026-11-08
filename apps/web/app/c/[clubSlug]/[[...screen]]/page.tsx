@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
-import { clubBySlug, screenPermission } from "@skys/domain";
+import { screenPermission } from "@skys/domain";
+import { clubBySlug } from "@/lib/live";
 import { ClubScreen } from "@/components/club-screens";
 import { getSession, viewerFor } from "@/lib/session";
 import { readState } from "@/lib/store";

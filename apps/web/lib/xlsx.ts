@@ -130,35 +130,43 @@ function sheetXml(headers: string[], rows: (string | number)[][]) {
 </worksheet>`;
 }
 
-function workbookXml(name: string) {
-  const safe = xml(name).replaceAll('"', "");
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-  <sheets><sheet name="${safe}" sheetId="1" r:id="rId1"/></sheets>
-</workbook>`;
+function sheetName(name: string, index: number) {
+  const clean = xml(name).replaceAll('"', "").replace(/[\\/?*[\]:]/g, " ").trim().slice(0, 31);
+  return clean || `Sayfa ${index + 1}`;
 }
 
-export function xlsxBytes(sheetName: string, headers: string[], rows: (string | number)[][]) {
+export function xlsxSheets(sheets: { name: string; headers: string[]; rows: (string | number)[][] }[]) {
   const file = (name: string, contents: string) => ({ name, data: text.encode(contents) });
+  const book = sheets.length ? sheets : [{ name: "Sayfa", headers: ["Kayıt"], rows: [] }];
+  const overrides = book.map((_, index) => `  <Override PartName="/xl/worksheets/sheet${index + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("\n");
+  const sheetTags = book.map((sheet, index) => `<sheet name="${sheetName(sheet.name, index)}" sheetId="${index + 1}" r:id="rId${index + 1}"/>`).join("");
+  const rels = book.map((_, index) => `  <Relationship Id="rId${index + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${index + 1}.xml"/>`).join("\n");
   return zip([
     file("[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
-  <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+${overrides}
 </Types>`),
     file("_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
 </Relationships>`),
-    file("xl/workbook.xml", workbookXml(sheetName)),
+    file("xl/workbook.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <sheets>${sheetTags}</sheets>
+</workbook>`),
     file("xl/_rels/workbook.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+${rels}
 </Relationships>`),
-    file("xl/worksheets/sheet1.xml", sheetXml(headers, rows)),
+    ...book.map((sheet, index) => file(`xl/worksheets/sheet${index + 1}.xml`, sheetXml(sheet.headers, sheet.rows))),
   ]);
+}
+
+export function xlsxBytes(sheetName: string, headers: string[], rows: (string | number)[][]) {
+  return xlsxSheets([{ name: sheetName, headers, rows }]);
 }
 
 export function downloadXlsx(filename: string, sheetName: string, headers: string[], rows: (string | number)[][]) {

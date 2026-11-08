@@ -1,3 +1,4 @@
+import type { Club } from "@skys/domain";
 import {
   branchName as branchNameBase,
   facilityName as facilityNameBase,
@@ -9,12 +10,16 @@ import {
   listSports as listSportsBase,
   listYearSeasons as listYearSeasonsBase,
   listStaff as listStaffBase,
+  listTitles as listTitlesBase,
   listTeams as listTeamsBase,
   staffName as staffNameBase,
   listTrainings as listTrainingsBase,
   clubConflictIds as clubConflictIdsBase,
   nameOf as nameOfBase,
   personProfile as personProfileBase,
+  clubs as catalogClubs,
+  clubById as clubByIdBase,
+  clubBySlug as clubBySlugBase,
   platformClubs as platformClubsBase,
   sportName as sportNameBase,
   teamName as teamNameBase,
@@ -39,8 +44,12 @@ export function directory(): Directory {
     trainings: state.trainings,
     hiddenTrainingIds: state.hiddenTrainingIds,
     planNotices: state.planNotices,
+    rollMarks: state.rollMarks,
+    rollNotices: state.rollNotices,
     developments: state.developments,
     staff: state.staff,
+    titles: state.titles,
+    hiddenTitleIds: state.hiddenTitleIds,
   };
 }
 
@@ -70,6 +79,10 @@ export function listSeasons(clubId: string) {
 
 export function listYearSeasons(clubId: string) {
   return listYearSeasonsBase(clubId, directory());
+}
+
+export function listTitles(clubId: string) {
+  return listTitlesBase(clubId, directory());
 }
 
 export function listStaff(clubId: string, viewer: Viewer) {
@@ -122,4 +135,18 @@ export function personProfile(clubId: string, viewer: Viewer, personId: string) 
 
 export function platformClubs() {
   return platformClubsBase(directory());
+}
+
+export function clubById(id: string) {
+  return readState().clubs.find((club) => club.id === id) ?? clubByIdBase(id);
+}
+
+export function clubBySlug(slug: string) {
+  return readState().clubs.find((club) => club.slug === slug) ?? clubBySlugBase(slug);
+}
+
+export function managedClubs(): Club[] {
+  const opened = readState().clubs;
+  const base = catalogClubs.filter((club) => club.slug === "yeni-ufuklar");
+  return [...base, ...opened.filter((club) => !base.some((item) => item.id === club.id || item.slug === club.slug))];
 }

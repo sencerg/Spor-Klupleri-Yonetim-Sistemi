@@ -1,12 +1,12 @@
 import { cookies } from "next/headers";
 import {
   channelClubs,
-  clubById,
-  findUser,
   isSuper,
   type UserAccount,
   type Viewer,
 } from "@skys/domain";
+import { clubById } from "./live";
+import { findAccount } from "./accounts";
 import { readState } from "./store";
 
 export interface Session {
@@ -16,7 +16,7 @@ export interface Session {
 
 export async function getSession(): Promise<Session | null> {
   const jar = await cookies();
-  const user = findUser(jar.get("skys_user")?.value);
+  const user = findAccount(jar.get("skys_user")?.value);
   if (!user) return null;
   return { user, supportClubId: jar.get("skys_support")?.value };
 }

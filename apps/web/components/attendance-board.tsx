@@ -1,83 +1,50 @@
-"use client";
-
-import { useState } from "react";
 import type { AttendanceStatus } from "@skys/domain";
 
-const options: { id: AttendanceStatus; label: string }[] = [
-  { id: "present", label: "Geldi" },
-  { id: "absent", label: "Gelmedi" },
+const options: { id: Exclude<AttendanceStatus, "pending">; label: string }[] = [
+  { id: "present", label: "Katıldı" },
+  { id: "absent", label: "Katılmadı" },
   { id: "excused", label: "İzinli" },
 ];
 
 export function AttendanceBoard({
   rows,
-  past,
+  action,
+  gun,
 }: {
   rows: { personId: string; name: string; team: string; status: AttendanceStatus }[];
-  past: boolean;
+  action: (formData: FormData) => Promise<void>;
+  gun: string;
 }) {
-  const [marks, setMarks] = useState(rows);
-  const [saved, setSaved] = useState(false);
-  const counts = {
-    present: marks.filter((row) => row.status === "present").length,
-    absent: marks.filter((row) => row.status === "absent").length,
-    excused: marks.filter((row) => row.status === "excused").length,
-  };
-
+  if (!rows.length) return <p className="text-sm text-[var(--muted)]">Bu grupta sporcu yok.</p>;
   return (
-    <div>
-      <div className="mb-4 flex flex-wrap gap-2 text-sm">
-        <span className="rounded-full bg-[#e5f2ea] px-3 py-1">{counts.present} geldi</span>
-        <span className="rounded-full bg-[#f8e4e1] px-3 py-1">{counts.absent} gelmedi</span>
-        <span className="rounded-full bg-[#f8efd4] px-3 py-1">{counts.excused} izinli</span>
-      </div>
-      <div className="divide-y divide-[var(--line)] rounded-2xl border border-[var(--line)] bg-[var(--card)]">
-        {marks.map((row) => (
+    <form id="yoklama-kayit" action={action} className="grid gap-4">
+      <input type="hidden" name="gun" value={gun} />
+      <p className="text-sm text-[var(--muted)]">İşaretlenenler kaydolur. Boş bırakılanlar bekler.</p>
+      <div className="divide-y divide-[var(--line)] rounded-2xl border border-[var(--line)] bg-white">
+        {rows.map((row) => (
           <div key={row.personId} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
             <div>
               <div className="font-medium">{row.name}</div>
               <div className="text-xs text-[var(--muted)]">{row.team}</div>
             </div>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-1">
               {options.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  onClick={() => {
-                    setSaved(false);
-                    setMarks((current) =>
-                      current.map((item) =>
-                        item.personId === row.personId ? { ...item, status: option.id } : item,
-                      ),
-                    );
-                  }}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                    row.status === option.id ? "bg-[var(--club)] text-white" : "bg-[#efeae1] text-[var(--ink)]"
-                  }`}
-                >
-                  {option.label}
-                </button>
+                <label key={option.id} className="cursor-pointer">
+                  <input
+                    type="radio"
+                    name={`durum-${row.personId}`}
+                    value={option.id}
+                    defaultChecked={row.status === option.id}
+                    className="peer sr-only"
+                  />
+                  <span className="inline-block rounded-full bg-[#efeae1] px-3 py-1.5 text-xs font-semibold text-[var(--ink)] peer-checked:bg-[var(--club)] peer-checked:text-white">{option.label}</span>
+                </label>
               ))}
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setSaved(true)}
-          className="btn-ink"
-        >
-          Yoklamayı kaydet
-        </button>
-        {saved ? (
-          <p className="text-sm text-[var(--muted)]">
-            {past
-              ? "Düzeltme işlendi. Eski yoklama silinmedi, işlem geçmişine fark olarak yazılır."
-              : "Katılım kaydedildi. Bildirim, yoklama işleminden ayrı kuyruğa alınır."}
-          </p>
-        ) : null}
-      </div>
-    </div>
+      <button className="btn-club w-fit">Kaydet</button>
+    </form>
   );
 }

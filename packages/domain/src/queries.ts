@@ -21,7 +21,7 @@ import {
   trainings,
   warehouses,
 } from "./catalog";
-import type { AthleteDevelopment, AttendanceStatus, Directory, DueOverride, DuePayment, Person, Training, UserAccount, Viewer } from "./types";
+import type { AthleteDevelopment, AttendanceStatus, Directory, DueOverride, DuePayment, Person, StaffTitle, TitleScope, Training, UserAccount, Viewer } from "./types";
 
 function withExtra<T>(base: T[], extra?: T[]) {
   return extra?.length ? base.concat(extra) : base;
@@ -29,10 +29,36 @@ function withExtra<T>(base: T[], extra?: T[]) {
 
 export const staffTitles = ["Kulüp başkanı", "Başantrenör", "Antrenör", "Mali İşler Yetkili"] as const;
 
-export const coachTitles = ["Başantrenör", "Antrenör"] as const;
+export const titleScopeLabels: Record<TitleScope, string> = {
+  lead: "Yönetim",
+  coach: "Antrenör kadrosu",
+  finance: "Tahsilat",
+};
 
-export function isCoachDuty(duty: string) {
-  return (coachTitles as readonly string[]).includes(duty);
+export function starterTitles(clubId: string): StaffTitle[] {
+  return [
+    { id: `ut-${clubId}-baskan`, clubId, name: "Kulüp başkanı", scope: "lead" },
+    { id: `ut-${clubId}-bas`, clubId, name: "Başantrenör", scope: "coach" },
+    { id: `ut-${clubId}-antrenor`, clubId, name: "Antrenör", scope: "coach" },
+    { id: `ut-${clubId}-mali`, clubId, name: "Mali İşler Yetkili", scope: "finance" },
+  ];
+}
+
+export function listTitles(clubId: string, dir?: Directory) {
+  const hidden = new Set(dir?.hiddenTitleIds ?? []);
+  const extras = dir?.titles ?? [];
+  const edited = new Map(extras.map((title) => [title.id, title]));
+  const starters = starterTitles(clubId);
+  const starterIds = new Set(starters.map((title) => title.id));
+  return [
+    ...starters.filter((title) => !hidden.has(title.id)).map((title) => edited.get(title.id) ?? title),
+    ...extras.filter((title) => title.clubId === clubId && !starterIds.has(title.id) && !hidden.has(title.id)),
+  ];
+}
+
+export function isCoachDuty(duty: string, titles?: StaffTitle[]) {
+  if (titles) return titles.some((title) => title.name === duty && title.scope === "coach");
+  return duty === "Başantrenör" || duty === "Antrenör";
 }
 
 function mergeStaff(dir?: Directory) {
@@ -88,9 +114,13 @@ function inBranch<T extends { branchId?: string }>(rows: T[], viewer: Viewer, cl
   return rows.filter((row) => !row.branchId || allowed.has(row.branchId));
 }
 
-function coachSees(viewer: Viewer, clubId: string, row: { teamId?: string; sportId: string }) {
+function coachSees(viewer: Viewer, clubId: string, row: { teamId?: string; sportId: string; coachStaffId?: string }, dir?: Directory) {
   const membership = membershipFor(viewer.user, clubId);
   if (!membership || membership.role !== "coach") return true;
+  if (row.coachStaffId) {
+    const coach = mergeStaff(dir).find((member) => member.id === row.coachStaffId);
+    if (coach && coach.name.toLocaleLowerCase("tr-TR") === viewer.user.name.toLocaleLowerCase("tr-TR")) return true;
+  }
   if (membership.teamIds?.length) return Boolean(row.teamId && membership.teamIds.includes(row.teamId));
   if (membership.sportIds?.length) return membership.sportIds.includes(row.sportId);
   return false;
@@ -141,8 +171,22 @@ export function listSports(clubId: string, dir?: Directory) {
     });
 }
 
+function blankSeason(clubId: string) {
+  const now = new Date();
+  const year = now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
+  return {
+    id: `sz-${clubId}-${year}`,
+    clubId,
+    name: `${year}-${year + 1}`,
+    start: `${year}-09-01`,
+    end: `${year + 1}-06-20`,
+    active: true,
+  };
+}
+
 export function listSeasons(clubId: string, dir?: Directory) {
-  return withExtra(seasons, dir?.seasons).filter((season) => season.clubId === clubId);
+  const rows = withExtra(seasons, dir?.seasons).filter((season) => season.clubId === clubId);
+  return rows.length ? rows : [blankSeason(clubId)];
 }
 
 export function listYearSeasons(clubId: string, dir?: Directory) {
@@ -182,7 +226,7 @@ export function listTeams(clubId: string, viewer: Viewer, dir?: Directory) {
     withExtra(teams, dir?.teams).filter((team) => team.clubId === clubId),
     viewer,
     clubId,
-  ).filter((team) => coachSees(viewer, clubId, team));
+  ).filter((team) => coachSees(viewer, clubId, team, dir));
 }
 
 export function listPeople(clubId: string, viewer: Viewer, dir?: Directory) {
@@ -190,7 +234,7 @@ export function listPeople(clubId: string, viewer: Viewer, dir?: Directory) {
     mergePeople(dir).filter((person) => person.clubId === clubId),
     viewer,
     clubId,
-  ).filter((person) => coachSees(viewer, clubId, person));
+  ).filter((person) => coachSees(viewer, clubId, person, dir));
 }
 
 export function listGuardians(clubId: string, dir?: Directory) {
@@ -210,7 +254,7 @@ export function clubSessions(clubId: string, dir?: Directory) {
 }
 
 export function listTrainings(clubId: string, viewer: Viewer, dir?: Directory) {
-  return inBranch(clubSessions(clubId, dir), viewer, clubId).filter((session) => coachSees(viewer, clubId, session));
+  return inBranch(clubSessions(clubId, dir), viewer, clubId).filter((session) => coachSees(viewer, clubId, session, dir));
 }
 
 export function listInvoices(clubId: string, viewer: Viewer) {
@@ -303,8 +347,8 @@ export function conflictsFor(sessions: Training[]) {
   return ids;
 }
 
-export function coachLeave(session: Training) {
-  const coach = staff.find((member) => member.id === session.coachStaffId);
+export function coachLeave(session: Training, dir?: Directory) {
+  const coach = mergeStaff(dir).find((member) => member.id === session.coachStaffId);
   if (!coach?.leave) return null;
   if (session.date >= coach.leave.from && session.date <= coach.leave.to) return coach;
   return null;
@@ -331,25 +375,29 @@ export function sessionBookings(sessionId: string) {
     .filter((booking) => booking.person);
 }
 
-export function attendanceFor(sessionId: string, roster: Person[]) {
+function rollMarks(dir?: Directory) {
+  const extra = dir?.rollMarks ?? [];
+  const keys = new Set(extra.map((mark) => `${mark.sessionId}:${mark.personId}`));
+  return [...attendance.filter((mark) => !keys.has(`${mark.sessionId}:${mark.personId}`)), ...extra];
+}
+
+export function attendanceFor(sessionId: string, roster: Person[], dir?: Directory) {
+  const marks = rollMarks(dir);
   return roster.map((person) => {
-    const mark = attendance.find(
-      (item) => item.sessionId === sessionId && item.personId === person.id,
-    );
+    const mark = marks.find((item) => item.sessionId === sessionId && item.personId === person.id);
     return {
       personId: person.id,
       name: person.name,
-      team: teamName(person.teamId),
+      team: teamName(person.teamId, dir),
       status: (mark?.status ?? "pending") as AttendanceStatus,
     };
   });
 }
 
-export function rosterFor(session: Training, viewer: Viewer) {
-  if (session.teamId) {
-    return listPeople(session.clubId, viewer).filter((person) => person.teamId === session.teamId);
-  }
-  return listPeople(session.clubId, viewer).filter((person) => person.sportId === session.sportId);
+export function rosterFor(session: Training, viewer: Viewer, dir?: Directory) {
+  const athletes = listPeople(session.clubId, viewer, dir).filter((person) => person.kind === "athlete" && person.status !== "left");
+  if (session.teamId) return athletes.filter((person) => person.teamId === session.teamId);
+  return athletes.filter((person) => person.sportId === session.sportId);
 }
 
 export function windowDays(before = 1, after = 5) {
@@ -415,6 +463,17 @@ export function formatTry(value: number) {
   }).format(value);
 }
 
+/** Ay içinde hizmet verilen öğrenci: aktif veya deneme (ayrılan / ara veren sayılmaz). */
+export function countsForStudentBill(status: string) {
+  return status === "active" || status === "trial";
+}
+
+export function studentBillForMonth(studentCount: number, unitPrice: number) {
+  const count = Math.max(0, Math.floor(studentCount));
+  const unit = Math.max(0, Math.round(unitPrice));
+  return { studentCount: count, unitPrice: unit, total: count * unit };
+}
+
 export function formatDay(iso: string) {
   const [year, month, day] = iso.split("-").map(Number);
   return new Date(year, month - 1, day).toLocaleDateString("tr-TR", {
@@ -448,7 +507,7 @@ export function personProfile(clubId: string, viewer: Viewer, personId: string, 
   return {
     person,
     invoices: invoices.filter((invoice) => invoice.personId === person.id && invoice.clubId === clubId),
-    marks: attendance.filter((mark) => mark.personId === person.id),
+    marks: rollMarks(dir).filter((mark) => mark.personId === person.id),
     custody: custodies.filter(
       (entry) => entry.clubId === clubId && entry.lines.some((line) => line.personId === person.id),
     ),
@@ -457,10 +516,33 @@ export function personProfile(clubId: string, viewer: Viewer, personId: string, 
   };
 }
 
-export function attention(clubId: string, viewer: Viewer) {
-  const sessions = listTrainings(clubId, viewer);
+export function overdueDues(
+  people: Person[],
+  today: string,
+  payments: DuePayment[],
+  overrides: DueOverride[],
+): MonthDue[] {
+  const current = today.slice(0, 7);
+  const starts = people
+    .filter((person) => person.kind === "athlete")
+    .map((person) => person.since.slice(0, 7))
+    .filter((month) => /^\d{4}-\d{2}$/.test(month) && month <= current)
+    .sort();
+  if (!starts.length) return [];
+  return monthsBetween(starts[0], current).flatMap((month) =>
+    duesForMonth(people, month, today, payments, overrides).filter((row) => row.status === "overdue"),
+  );
+}
+
+export function attention(
+  clubId: string,
+  viewer: Viewer,
+  dir?: Directory,
+  finance?: { count: number; total: number },
+) {
+  const sessions = listTrainings(clubId, viewer, dir);
   const items: { title: string; detail: string; href: string }[] = [];
-  const conflicts = [...clubConflictIds(clubId)].filter((id) => sessions.some((session) => session.id === id));
+  const conflicts = [...clubConflictIds(clubId, dir)].filter((id) => sessions.some((session) => session.id === id));
   if (can(viewer, clubId, "schedule.view") && conflicts.length) {
     const session = sessions.find((item) => item.id === conflicts[0]);
     items.push({
@@ -469,7 +551,7 @@ export function attention(clubId: string, viewer: Viewer) {
       href: "takvim",
     });
   }
-  const leave = sessions.map(coachLeave).find(Boolean);
+  const leave = sessions.map((session) => coachLeave(session, dir)).find(Boolean);
   if (can(viewer, clubId, "schedule.view") && leave) {
     items.push({
       title: "Antrenör izinde",
@@ -485,38 +567,51 @@ export function attention(clubId: string, viewer: Viewer) {
       href: "yoklama",
     });
   }
-  const overdue = listInvoices(clubId, viewer).filter((invoice) => invoice.status === "overdue");
-  if (can(viewer, clubId, "finance.view") && overdue.length) {
-    const total = overdue.reduce((sum, invoice) => sum + (invoice.amount - invoice.paid), 0);
-    items.push({
-      title: "Gecikmiş aidat",
-      detail: `${overdue.length} kayıt, ${formatTry(total)} açık.`,
-      href: "aidat",
-    });
+  if (finance) {
+    if (can(viewer, clubId, "finance.view") && finance.count) {
+      items.push({
+        title: "Gecikmiş aidat",
+        detail: `${finance.count} kayıt, ${formatTry(finance.total)} açık.`,
+        href: "aidat",
+      });
+    }
+  } else {
+    const overdue = listInvoices(clubId, viewer).filter((invoice) => invoice.status === "overdue");
+    if (can(viewer, clubId, "finance.view") && overdue.length) {
+      const total = overdue.reduce((sum, invoice) => sum + (invoice.amount - invoice.paid), 0);
+      items.push({
+        title: "Gecikmiş aidat",
+        detail: `${overdue.length} kayıt, ${formatTry(total)} açık.`,
+        href: "aidat",
+      });
+    }
   }
-  const low = listStock(clubId, viewer).filter((item) => item.qty < item.min);
-  if (can(viewer, clubId, "stock.view") && low.length) {
-    items.push({
-      title: "Düşük stok",
-      detail: low.map((item) => `${item.name} ${item.variant}`).join(", "),
-      href: "stok",
-    });
-  }
-  const retry = listNotices(clubId).filter((notice) => notice.state === "retrying");
-  if (can(viewer, clubId, "notifications.view") && retry.length) {
-    items.push({
-      title: "Bildirim yeniden denenecek",
-      detail: retry[0].failureNote ?? retry[0].title,
-      href: "bildirimler",
-    });
-  }
-  const waiting = sessions.filter((session) => waitlist(session.id).length > 0);
-  if (can(viewer, clubId, "sessions.view") && waiting.length) {
-    items.push({
-      title: "Bekleme listesi",
-      detail: `${waiting[0].title} dolu. Sıradaki üyeye iptalde süre tanınır.`,
-      href: "seanslar",
-    });
+  if (dir) {
+    const queued = (dir.rollNotices ?? []).filter((notice) => notice.clubId === clubId);
+    if (can(viewer, clubId, "notifications.view") && queued.length) {
+      items.push({
+        title: "Yoklama listesi kuyrukta",
+        detail: `${queued.length} liste duruyor, gönderilmedi.`,
+        href: "bildirimler",
+      });
+    }
+  } else {
+    const low = listStock(clubId, viewer).filter((item) => item.qty < item.min);
+    if (can(viewer, clubId, "stock.view") && low.length) {
+      items.push({
+        title: "Düşük stok",
+        detail: low.map((item) => `${item.name} ${item.variant}`).join(", "),
+        href: "stok",
+      });
+    }
+    const retry = listNotices(clubId).filter((notice) => notice.state === "retrying");
+    if (can(viewer, clubId, "notifications.view") && retry.length) {
+      items.push({
+        title: "Bildirim yeniden denenecek",
+        detail: retry[0].failureNote ?? retry[0].title,
+        href: "bildirimler",
+      });
+    }
   }
   return items;
 }
@@ -583,6 +678,36 @@ export function monthsBetween(start: string, end: string) {
     cursor = shiftMonth(cursor, 1);
   }
   return months;
+}
+
+export function duesSeasonMonths(
+  person: { since: string; teamId?: string; sportId?: string },
+  seasons: { id: string; name: string; start: string; end: string }[],
+  teams: { id: string; seasonId?: string }[],
+  sports: { id: string; seasonId?: string }[],
+  today: string,
+  history: { month: string }[] = [],
+) {
+  const team = person.teamId ? teams.find((item) => item.id === person.teamId) : undefined;
+  const sport = person.sportId ? sports.find((item) => item.id === person.sportId) : undefined;
+  const pinned = seasons.find((item) => item.id === (team?.seasonId || sport?.seasonId));
+  const month = today.slice(0, 7);
+  const covering = seasons.find((item) => item.start.slice(0, 7) <= month && item.end.slice(0, 7) >= month);
+  const named = seasons.find((item) => item.name === "2026-2027");
+  const season = pinned ?? covering ?? named ?? seasons[0];
+  const since = person.since.slice(0, 7);
+  if (!season) return { seasonName: "", months: since ? [since] : [] };
+  const seasonStart = season.start.slice(0, 7);
+  const seasonEnd = season.end.slice(0, 7);
+  const start = since > seasonStart ? since : seasonStart;
+  const months = start <= seasonEnd ? monthsBetween(start, seasonEnd) : [];
+  const older = history
+    .map((item) => item.month)
+    .filter((item) => /^\d{4}-\d{2}$/.test(item) && item >= since && !months.includes(item) && item < start);
+  return {
+    seasonName: season.name,
+    months: [...new Set([...older, ...months])].sort((left, right) => left.localeCompare(right)),
+  };
 }
 
 export interface MonthDue {

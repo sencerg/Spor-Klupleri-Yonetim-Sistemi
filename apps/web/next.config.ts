@@ -1,8 +1,14 @@
 import path from "path";
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  output: "standalone",
+const nextConfig = {
+  // Standalone tracing walks the whole tree and stalls `next dev` on this machine.
+  ...(process.env.NODE_ENV === "production" ? { output: "standalone" as const } : {}),
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "3mb",
+    },
+  },
   async redirects() {
     return [
       { source: "/c/mavi-nefes", destination: "/c/yeni-ufuklar-2", permanent: false },
@@ -16,13 +22,7 @@ const nextConfig: NextConfig = {
     resolveAlias: {
       "@skys/domain": "../../packages/domain/src/index.ts",
     },
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
   },
-};
+} as NextConfig;
 
 export default nextConfig;

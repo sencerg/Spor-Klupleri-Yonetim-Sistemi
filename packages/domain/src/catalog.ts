@@ -370,7 +370,7 @@ export const audit: AuditEntry[] = [
 ];
 
 export const users: UserAccount[] = [
-  { id: "selin", name: "Selin Acar", email: "selin@skys.test", memberships: [{ role: "platform_super" }] },
+  { id: "admin", name: "AllPlay360 Admin", email: "admin", memberships: [{ role: "platform_super" }] },
   { id: "kerem", name: "Kerem Usta", email: "kerem@kadikoyatletik.test", memberships: [{ role: "club_owner", clubId: "kadikoy" }] },
   { id: "deniz", name: "Deniz Koç", email: "deniz@mavispor.test", memberships: [{ role: "club_manager", clubId: "mavi" }] },
   { id: "ece", name: "Ece Yıldız", email: "ece@kadikoyatletik.test", memberships: [{ role: "branch_manager", clubId: "kadikoy", branchIds: ["moda"] }] },

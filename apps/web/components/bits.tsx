@@ -1,22 +1,50 @@
 import type { ReactNode } from "react";
 
+export function ClubMark({
+  name,
+  monogram,
+  logo,
+  accent,
+  size = "md",
+}: {
+  name: string;
+  monogram: string;
+  logo?: string;
+  accent?: string;
+  size?: "sm" | "md" | "lg";
+}) {
+  const logoClass = size === "sm" ? "admin-logo admin-logo-sm" : size === "lg" ? "admin-logo admin-logo-lg" : "admin-logo";
+  const markClass = size === "sm" ? "admin-mark admin-mark-sm" : size === "lg" ? "admin-mark admin-mark-lg" : "admin-mark";
+  if (logo) return <img src={logo} alt={name} className={logoClass} />;
+  return (
+    <span className={markClass} style={accent ? { background: accent } : undefined} aria-hidden>
+      {monogram}
+    </span>
+  );
+}
+
 export function PageHeader({
   kicker,
   title,
   description,
+  mark,
   children,
 }: {
   kicker?: string;
   title: string;
   description?: string;
+  mark?: ReactNode;
   children?: ReactNode;
 }) {
   return (
     <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
-      <div>
-        {kicker ? <div className="page-kicker">{kicker}</div> : null}
-        <h1 className="page-title mt-1">{title}</h1>
-        {description ? <p className="page-subtitle">{description}</p> : null}
+      <div className="flex min-w-0 items-start gap-3">
+        {mark}
+        <div className="min-w-0">
+          {kicker ? <div className="page-kicker">{kicker}</div> : null}
+          <h1 className="page-title mt-1">{title}</h1>
+          {description ? <p className="page-subtitle">{description}</p> : null}
+        </div>
       </div>
       {children}
     </div>
@@ -142,8 +170,8 @@ export const statusLabel: Record<string, string> = {
   paused: "Ara verdi",
   trial: "Deneme dersi",
   left: "Ayrıldı",
-  present: "Geldi",
-  absent: "Gelmedi",
+  present: "Katıldı",
+  absent: "Katılmadı",
   excused: "İzinli",
   pending: "Bekliyor",
   sent: "İletildi",

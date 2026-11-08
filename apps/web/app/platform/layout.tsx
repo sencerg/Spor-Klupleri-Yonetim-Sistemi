@@ -9,20 +9,20 @@ export default async function PlatformLayout({ children }: { children: React.Rea
   if (!isSuper(session.user)) redirect("/");
   return (
     <Frame
-      accent="#12245c"
-      accentSoft="#e7ecf8"
-      topbar={<TopBar title="Yeni Ufuklar" userName={session.user.name} userRole="Süper admin" />}
+      accent="#00b7d6"
+      accentSoft="#d9f7fc"
+      topbar={<TopBar title="Sistem yöneticisi" userName={session.user.name} userRole="Sistem yöneticisi" />}
       sidebar={
         <SideNav
-          brand="Yeni Ufuklar"
-          monogram="YU"
-          detail="Platform"
-          logo="/yeni-ufuklar.png"
+          brand="AllPlay360"
+          monogram="A"
+          detail="Sistem"
+          logo="/allplay360.png"
           current="/platform"
           items={[
-            { href: "/platform", label: "Genel durum", group: "Platform" },
-            { href: "/platform/kulupler", label: "Yeni Ufuklar", group: "Platform" },
-            { href: "/platform/paketler", label: "Paketler", group: "Platform" },
+            { href: "/platform", label: "Genel durum", group: "Sistem" },
+            { href: "/platform/kulup", label: "Kulüpler", group: "Sistem" },
+            { href: "/platform/sporcular", label: "Sporcular", group: "Sistem" },
           ]}
         />
       }

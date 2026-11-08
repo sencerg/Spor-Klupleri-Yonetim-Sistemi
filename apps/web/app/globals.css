@@ -68,6 +68,20 @@ body {
   font-weight: 800;
 }
 
+.admin-mark-sm {
+  height: 28px;
+  width: 28px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.admin-mark-lg {
+  height: 52px;
+  width: 52px;
+  border-radius: 14px;
+  font-size: 18px;
+}
+
 .admin-logo {
   height: 42px;
   width: 42px;
@@ -75,6 +89,17 @@ body {
   border-radius: 50%;
   background: #fff;
   object-fit: cover;
+  border: 1px solid #e8edf5;
+}
+
+.admin-logo-sm {
+  height: 28px;
+  width: 28px;
+}
+
+.admin-logo-lg {
+  height: 52px;
+  width: 52px;
 }
 
 .admin-brand span {
@@ -388,6 +413,52 @@ body {
   color: #fff;
 }
 
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.btn-line:hover {
+  border-color: color-mix(in srgb, var(--club) 45%, #dfe5ef);
+  color: var(--club);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.icon-btn:hover {
+  border-color: color-mix(in srgb, var(--club) 45%, #dfe5ef);
+  color: var(--club);
+}
+
+.popup-timer {
+  transform-origin: left center;
+  animation: popup-timer 12s linear forwards;
+}
+
+@keyframes popup-timer {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
 .btn-club:hover,
 .btn-ink:hover {
   filter: brightness(0.94);
@@ -512,6 +583,109 @@ body {
   color: #fff;
   font-size: 12px;
   font-weight: 800;
+}
+
+.admin-auth {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 0%, rgb(0 183 214 / 0.28), transparent 60%),
+    radial-gradient(ellipse 40% 35% at 80% 90%, rgb(0 120 160 / 0.18), transparent 55%),
+    linear-gradient(165deg, #05070d 0%, #0a1524 48%, #061018 100%);
+  padding: 2rem 1.25rem;
+  color: #fff;
+}
+
+.admin-auth-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 18% 28% auto;
+  height: 280px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgb(0 229 255 / 0.18), transparent 70%);
+  filter: blur(18px);
+}
+
+.admin-auth-card {
+  position: relative;
+  width: min(100%, 420px);
+  border: 1px solid rgb(126 231 255 / 0.18);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgb(10 20 34 / 0.92), rgb(6 12 22 / 0.96));
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.03) inset;
+  padding: 2rem 1.75rem 1.75rem;
+  text-align: center;
+}
+
+.admin-auth-logo {
+  display: block;
+  width: 148px;
+  height: 148px;
+  margin: 0 auto 1.1rem;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgb(0 229 255 / 0.35), 0 0 36px rgb(0 183 214 / 0.28);
+}
+
+.admin-auth-kicker {
+  margin: 0;
+  color: #7ee7ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.admin-auth-card h1 {
+  margin: 0.35rem 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.admin-auth-copy {
+  margin: 0 0 1.4rem;
+  color: #9eb6c8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.admin-auth-field {
+  width: 100%;
+  border: 1px solid rgb(126 231 255 / 0.22);
+  border-radius: 10px;
+  background: #07101a;
+  padding: 11px 12px;
+  color: #f4fbff;
+  font-size: 14px;
+  outline: none;
+}
+
+.admin-auth-field:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 0 3px rgb(0 229 255 / 0.16);
+}
+
+.admin-auth-btn {
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #2af0ff 0%, #00b7d6 100%);
+  color: #041018;
+  font-size: 14px;
+  font-weight: 800;
+  height: 44px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgb(0 183 214 / 0.28);
+}
+
+.admin-auth-btn:hover {
+  filter: brightness(1.05);
 }
 
 @media (max-width: 960px) {

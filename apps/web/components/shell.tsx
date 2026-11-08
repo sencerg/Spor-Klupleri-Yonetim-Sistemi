@@ -1,4 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+function menuPath(pathname: string) {
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts[0] === "c") {
+    const rest = parts.slice(2).join("/");
+    return rest ? `/${rest}` : "/";
+  }
+  return pathname || "/";
+}
 
 export function SideNav({
   brand,
@@ -15,7 +27,11 @@ export function SideNav({
   logo?: string;
   current: string;
 }) {
-  const path = current;
+  const path = menuPath(usePathname() || current);
+  const activeHref = items
+    .map((item) => item.href)
+    .filter((href) => (href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`)))
+    .sort((left, right) => right.length - left.length)[0];
   const groups = items.reduce<{ group: string; items: typeof items }[]>((list, item) => {
     const found = list.find((entry) => entry.group === item.group);
     if (found) found.items.push(item);
@@ -37,7 +53,7 @@ export function SideNav({
           <div key={group.group} className="admin-group">
             <div className="admin-group-label">{group.group}</div>
             {group.items.map((item) => {
-              const active = item.href === "/" ? path === "/" : path === item.href || path.startsWith(`${item.href}/`);
+              const active = item.href === activeHref;
               return (
                 <Link key={item.href} href={item.href} className={`admin-link-row ${active ? "active" : ""}`}>
                   {item.label}
